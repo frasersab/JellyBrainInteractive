@@ -8,31 +8,33 @@ brain.importBrain(brain5000Json);
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+canvas.width = 200;
+canvas.height = 200;
 let coord = { x: 0, y: 0 };
 
 // add event listeners
 document.addEventListener("mousedown", start);
 document.addEventListener("mouseup", stop);
-window.addEventListener("resize", resize);
 
-resize();
-
-function resize() {
-  ctx.canvas.width = window.innerWidth;
-  ctx.canvas.height = window.innerHeight;
-}
-function reposition(event) {
+function reposition(event)
+{
   coord.x = event.clientX - canvas.offsetLeft;
   coord.y = event.clientY - canvas.offsetTop;
 }
-function start(event) {
+
+function start(event)
+{
   document.addEventListener("mousemove", draw);
   reposition(event);
 }
-function stop() {
+
+function stop()
+{
   document.removeEventListener("mousemove", draw);
 }
-function draw(event) {
+
+function draw(event)
+{
   ctx.beginPath();
   ctx.lineWidth = 5;
   ctx.lineCap = "round";
