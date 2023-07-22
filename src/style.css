@@ -1,0 +1,21 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+#header {
+    width: 100%;
+    height: auto;
+    text-align: center;
+
+}
+
+#drawing-pad {
+    padding: 0;
+    margin: auto;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

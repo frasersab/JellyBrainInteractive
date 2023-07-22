@@ -1,0 +1,1 @@
+{"mappings":"AAAA,IAAI,QAAQ,IAAI,WAAW,KAAK,KAAK,IAAI,UAAU,cAAc,MAAM,gBAAgB,SAAS,gBAAgB","sources":["src/js/main.js"],"sourcesContent":["let brain = new JellyBrain(784, 784, 10, costFuncs.crossEntropy, 0.01, activationFuncs.sigmoid, activationFuncs.softmax);"],"names":[],"version":3,"file":"index.aa69868b.js.map","sourceRoot":"/__parcel_source_root/"}
