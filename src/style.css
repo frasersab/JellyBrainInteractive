@@ -10,12 +10,16 @@ body {
 
 }
 
-#drawing-pad {
+#canvas {
+    /*width: 28px;
+    height: 28px;
     padding: 0;
     margin: auto;
     display: block;
     top: 0;
     bottom: 0;
     left: 0;
-    right: 0;
+    right: 0;*/
+    width: 100vw;
+    height: 100vh;
 }

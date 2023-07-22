@@ -9,11 +9,9 @@ body {
   height: auto;
 }
 
-#drawing-pad {
-  margin: auto;
-  padding: 0;
-  display: block;
-  inset: 0;
+#canvas {
+  width: 100vw;
+  height: 100vh;
 }
 
 /*# sourceMappingURL=index.2cdaf7bc.css.map */
