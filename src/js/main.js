@@ -62,9 +62,9 @@ function clear()
 function guess()
 {
     let image = [];
-    for (let y = 0; y < 28; y++)
+    for (let y = 0; y <= 27; y++)
     {
-        for (let x = 0; x < 28; x++)
+        for (let x = 0; x <= 27; x++)
         {
             let pixel = ctx.getImageData(x, y, 1, 1);
             image.push((pixel.data[3]) / (255));
