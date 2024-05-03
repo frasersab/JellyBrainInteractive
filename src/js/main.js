@@ -1,9 +1,10 @@
 import brain5000Json from '../brains/brain5000.json';
-import {JellyBrain, costFuncs, activationFuncs} from '../../node_modules/jellybrain/src/JellyBrain.js'
+import brain22000Json from '../brains/brain22000.json';
+import {JellyBrain, costFuncs, activationFuncs} from '../../node_modules/jellybrain/src/JellyBrain.js';
 
 // load the brain
 let brain = new JellyBrain(784, 784, 10, costFuncs.crossEntropy, 0.01, activationFuncs.sigmoid, activationFuncs.softmax);
-brain.importBrain(brain5000Json);
+brain.importBrain(brain22000Json);
 
 
 const canvas = document.getElementById("canvas");
@@ -17,6 +18,7 @@ document.addEventListener("mousedown", start);
 document.addEventListener("mouseup", stop);
 
 // add button click
+document.getElementById("clearButton").addEventListener("click", clear);
 document.getElementById("guessButton").addEventListener("click", guess);
 
 function reposition(event)
@@ -46,6 +48,11 @@ function draw(event)
   reposition(event);
   ctx.lineTo(coord.x, coord.y);
   ctx.stroke();
+}
+
+function clear()
+{
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function guess()
