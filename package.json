@@ -11,6 +11,7 @@
   "author": "Fraser Sabine",
   "license": "ISC",
   "dependencies": {
+    "chart.js": "^4.4.2",
     "jellybrain": "^1.0.1"
   },
   "devDependencies": {
