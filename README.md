@@ -1,6 +1,8 @@
 # JellyBrain Interactive
 
-This is not complete yet but will give an interactive portal to the JellyBrain neural network
+This is not complete yet but the current version can be accessed here:
+
+https://frasersab.github.io/JellyBrainInteractive/
 
 
 ## License
