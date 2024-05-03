@@ -41,7 +41,7 @@ function stop()
 function draw(event)
 {
   ctx.beginPath();
-  ctx.lineWidth = 3;
+  ctx.lineWidth = 1.5;
   ctx.lineCap = "round";
   ctx.strokeStyle = "black";
   ctx.moveTo(coord.x, coord.y);
