@@ -56,6 +56,7 @@ function draw(event)
 function clear()
 {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  guessText.innerHTML = "My guess will show here!";
 }
 
 function guess()
