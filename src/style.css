@@ -1,3 +1,7 @@
+:root {
+    --scale: 8;
+}
+
 body {
     margin: 0px;
     padding: 0px;
@@ -12,6 +16,6 @@ body {
 
 #canvas {
     border: 1px solid black;
-    width: 28px;
-    height: 28px;
+    width: calc(28px * var(--scale));
+    height: calc(28px * var(--scale));
 }

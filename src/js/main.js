@@ -11,7 +11,10 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 canvas.width = 28;
 canvas.height = 28;
+let scale = getComputedStyle(document.body).getPropertyValue('--scale');
 let coord = { x: 0, y: 0 };
+
+
 
 // add event listeners
 document.addEventListener("mousedown", start);
@@ -23,8 +26,8 @@ document.getElementById("guessButton").addEventListener("click", guess);
 
 function reposition(event)
 {
-  coord.x = event.clientX - canvas.offsetLeft;
-  coord.y = event.clientY - canvas.offsetTop;
+  coord.x = (event.clientX - canvas.offsetLeft) / scale;
+  coord.y = (event.clientY - canvas.offsetTop) / scale;
 }
 
 function start(event)
