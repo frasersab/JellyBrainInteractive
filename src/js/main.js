@@ -129,7 +129,7 @@ function copyData()
 {
   let image = getImage(false);
   navigator.clipboard.writeText(JSON.stringify(image));
-  alert("Copied image data.");
+  alert("Image data copied to clipboard.");
 }
 
 // helper functions
