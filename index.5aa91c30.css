@@ -1,0 +1,2 @@
+:root{--scale:8}body{margin:0;padding:0}#header{text-align:center;width:100%;height:auto}#guessText{font-size:20px}#canvas{width:calc(28px*var(--scale));height:calc(28px*var(--scale));border:1px solid #000}#chartDiv{width:200px;height:100px}
+/*# sourceMappingURL=index.5aa91c30.css.map */
