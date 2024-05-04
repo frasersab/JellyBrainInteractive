@@ -1,11 +1,10 @@
-import brain5000Json from '../brains/brain5000.json';
-import brain22000Json from '../brains/brain60000.json';
+import brain60000Json from '../brains/brain60000.json';
 import {JellyBrain, costFuncs, activationFuncs} from '../../node_modules/jellybrain/src/JellyBrain.js';
 import Chart from 'chart.js/auto';
 
 // load the brain
 let brain = new JellyBrain(784, 784, 10, costFuncs.crossEntropy, 0.01, activationFuncs.sigmoid, activationFuncs.softmax);
-brain.importBrain(brain22000Json);
+brain.importBrain(brain60000Json);
 
 
 // setup the canvas
