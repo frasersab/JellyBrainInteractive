@@ -1,5 +1,5 @@
 import brain5000Json from '../brains/brain5000.json';
-import brain22000Json from '../brains/brain22000.json';
+import brain22000Json from '../brains/brain60000.json';
 import {JellyBrain, costFuncs, activationFuncs} from '../../node_modules/jellybrain/src/JellyBrain.js';
 import Chart from 'chart.js/auto';
 
