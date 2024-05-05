@@ -202,7 +202,7 @@ function trainBrain()
     {
       brain.changeLearningRate(learningRate);
     }
-    targetArray = new Array(10).fill(0);
+    let targetArray = new Array(10).fill(0);
     targetArray[label] = 1;
     brain.train(image, targetArray);
     guess();
