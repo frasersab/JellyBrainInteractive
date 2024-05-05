@@ -62,7 +62,8 @@ document.addEventListener("mouseup", stop);
 // add button listeners
 document.getElementById("clearButton").addEventListener("click", clear);
 document.getElementById("guessButton").addEventListener("click", guess);
-document.getElementById("copyButton").addEventListener("click", copyData);
+document.getElementById("copyImageButton").addEventListener("click", copyImageData);
+document.getElementById("copyBrainButton").addEventListener("click", copyBrainData);
 
 
 // drawing functions
@@ -124,11 +125,18 @@ function guess()
     updateChart(guessArray);
 }
 
-function copyData()
+function copyImageData()
 {
   let image = getImage(false);
   navigator.clipboard.writeText(JSON.stringify(image));
   alert("Image data copied to clipboard.");
+}
+
+function copyBrainData()
+{
+  let brainData = brain.exportBrain();
+  navigator.clipboard.writeText(JSON.stringify(brainData));
+  alert("Brain data copied to clipboard.");
 }
 
 // helper functions
