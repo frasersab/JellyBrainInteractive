@@ -1,9 +1,9 @@
 # JellyBrain Interactive
 ## Usage
-Go to https://frasersab.github.io/JellyBrainInteractive/ to try and see if JellyBrain can guess the number you draw. It will also provide the probability distribution it bases it's guess off.
+Go to https://frasersab.github.io/JellyBrainInteractive/ to try and see if JellyBrain can guess the number you draw. It will also provide the probability distribution it bases it's guess off. You can also provide the actual number drawn and train the brain live, then watch how the probability distribution changes after training.
 
 ## Limitations
-Because my laptop is slow, I have only trained the neural network on a subset of the MNIST dataset, so it will make many mistakes. However, as it is, it is better than random guessing!
+This is a simple neural network and so has a limited accuracy. It needs numbers to be drawn centered and not off to one side as this is how the training dataset has been made.
 
 ## Make more training data
 If you want to make more training data please use the 'copy image data' button and save a JSON file with the following format:

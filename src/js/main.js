@@ -1,10 +1,11 @@
-import brain60000Json from '../brains/brain60000.json';
+import brainBigJson from '../brains/brainBig.json';
 import {JellyBrain, costFuncs, activationFuncs} from '../../node_modules/jellybrain/src/JellyBrain.js';
 import Chart from 'chart.js/auto';
 
 // load the brain
-let brain = new JellyBrain(784, 784, 10, costFuncs.crossEntropy, 0.01, activationFuncs.sigmoid, activationFuncs.softmax);
-brain.importBrain(brain60000Json);
+let brain = new JellyBrain(784, 784, 10, costFuncs.crossEntropy, 0.005, activationFuncs.sigmoid, activationFuncs.softmax);
+brain.importBrain(brainBigJson);
+document.getElementById('learningRate').value = brain.learningRate;
 
 
 // setup the canvas
@@ -64,6 +65,7 @@ document.getElementById("clearButton").addEventListener("click", clear);
 document.getElementById("guessButton").addEventListener("click", guess);
 document.getElementById("copyImageButton").addEventListener("click", copyImageData);
 document.getElementById("copyBrainButton").addEventListener("click", copyBrainData);
+document.getElementById('importButton').addEventListener("click", importBrain);
 document.getElementById("trainButton").addEventListener("click", trainBrain);
 
 // drawing functions
@@ -125,6 +127,7 @@ function guess()
     updateChart(guessArray);
 }
 
+
 function copyImageData()
 {
   let image = getImage(false);
@@ -139,21 +142,69 @@ function copyBrainData()
   alert("Brain data copied to clipboard.");
 }
 
+function importBrain()
+{
+  var files = document.getElementById('selectFiles').files;
+  if (files.length <= 0) {
+    return false;
+  }
+  
+  var fr = new FileReader();
+  
+  fr.onload = function(e) { 
+    try
+    {
+      var result = JSON.parse(e.target.result);
+    }
+    catch (error)
+    {
+      console.log(error);
+      alert("Cannot import new brain as an error occured during parsing. Please see console log for more details.");
+    }
+    if (!(result.hasOwnProperty("weightsIH") && result.hasOwnProperty("weightsHO") && result.hasOwnProperty("biasH") && result.hasOwnProperty("biasO")))
+    {
+      alert("Cannot import new brain as it is missing data.");
+    }
+    else
+    {
+      brain.importBrain(result);
+      alert("New brain has been imported.");
+    }
+  }
+  
+  fr.readAsText(files.item(0));
+}
+
 function trainBrain()
 {
   let image = getImage();
   let label = Number(document.getElementById('label').value);
+  let learningRate = Number(document.getElementById('learningRate').value);
   if (isNaN(label))
   {
     alert("Cannot train because input label isn't a number.");
   }
   else if (label < 0 || label > 9)
   {
-    alert("Cannot train because input label is invalid. Must be a number between 0-9.");
+    alert("Cannot train because input label is invalid. Must be a number from 0 to 9.");
+  }
+  else if (isNaN(learningRate))
+  {
+    alert("Cannot train because learning rate isn't a number.");
+  }
+  else if (learningRate < 0 || learningRate > 1)
+  {
+    alert("Cannot train because learning rate is invalid. Must be a number from 0 to 1.");
   }
   else
   {
-    brain.train(image, label);
+    if (brain.learningRate != learningRate)
+    {
+      brain.changeLearningRate(learningRate);
+    }
+    targetArray = new Array(10).fill(0);
+    targetArray[label] = 1;
+    brain.train(image, targetArray);
     guess();
   }
 }
