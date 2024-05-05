@@ -4,7 +4,15 @@
 
 body {
     margin: 0px;
-    padding: 0px;
+    padding: 20px;
+}
+
+.guessLine {
+    display: inline;
+}
+
+.container {
+    padding-top: 30px;
 }
 
 #header {

@@ -64,7 +64,7 @@ document.getElementById("clearButton").addEventListener("click", clear);
 document.getElementById("guessButton").addEventListener("click", guess);
 document.getElementById("copyImageButton").addEventListener("click", copyImageData);
 document.getElementById("copyBrainButton").addEventListener("click", copyBrainData);
-
+document.getElementById("trainButton").addEventListener("click", trainBrain);
 
 // drawing functions
 function reposition(event)
@@ -107,7 +107,7 @@ function updateChart(probability)
 function clear()
 {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  guessText.innerHTML = "My guess will show here!";
+  guessText.innerHTML = "?";
   updateChart([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
 }
 
@@ -137,6 +137,25 @@ function copyBrainData()
   let brainData = brain.exportBrain();
   navigator.clipboard.writeText(JSON.stringify(brainData));
   alert("Brain data copied to clipboard.");
+}
+
+function trainBrain()
+{
+  let image = getImage();
+  let label = Number(document.getElementById('label').value);
+  if (isNaN(label))
+  {
+    alert("Cannot train because input label isn't a number.");
+  }
+  else if (label < 0 || label > 9)
+  {
+    alert("Cannot train because input label is invalid. Must be a number between 0-9.");
+  }
+  else
+  {
+    brain.train(image, label);
+    guess();
+  }
 }
 
 // helper functions
