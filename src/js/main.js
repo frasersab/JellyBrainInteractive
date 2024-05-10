@@ -56,8 +56,11 @@ let canvasChart = new Chart(
 
 
 // add event listeners
-document.addEventListener("mousedown", start);
-document.addEventListener("mouseup", stop);
+document.addEventListener("touchstart", startTouch);
+document.addEventListener("touchend", stopTouch);
+document.addEventListener("mousedown", startClick);
+document.addEventListener("mouseup", stopClick);
+
 
 
 // add button listeners
@@ -68,32 +71,63 @@ document.getElementById("copyBrainButton").addEventListener("click", copyBrainDa
 document.getElementById('importButton').addEventListener("click", importBrain);
 document.getElementById("trainButton").addEventListener("click", trainBrain);
 
-// drawing functions
-function reposition(event)
+// touch drawing functions
+function repositionTouch(event)
 {
-  coord.x = (event.clientX - canvas.offsetLeft) / scale;
-  coord.y = (event.clientY - canvas.offsetTop) / scale;
+  let touch = event.touches[0];
+  coord.x = (touch.pageX - canvas.offsetLeft) / scale;
+  coord.y = (touch.pageY - canvas.offsetTop) / scale;
 }
 
-function start(event)
+function startTouch(event)
 {
-  document.addEventListener("mousemove", draw);
-  reposition(event);
+  document.addEventListener("touchmove", drawTouch);
+  repositionTouch(event);
 }
 
-function stop()
+function stopTouch()
 {
-  document.removeEventListener("mousemove", draw);
+  document.removeEventListener("touchmove", drawTouch);
 }
 
-function draw(event)
+function drawTouch(event)
 {
   ctx.beginPath();
   ctx.lineWidth = 1.5;
   ctx.lineCap = "round";
   ctx.strokeStyle = "black";
   ctx.moveTo(coord.x, coord.y);
-  reposition(event);
+  repositionTouch(event);
+  ctx.lineTo(coord.x, coord.y);
+  ctx.stroke();
+}
+
+// click drawing functions
+function repositionClick(event)
+{
+  coord.x = (event.clientX - canvas.offsetLeft) / scale;
+  coord.y = (event.clientY - canvas.offsetTop) / scale;
+}
+
+function startClick(event)
+{
+  document.addEventListener("mousemove", drawClick);
+  repositionClick(event);
+}
+
+function stopClick()
+{
+  document.removeEventListener("mousemove", drawClick);
+}
+
+function drawClick(event)
+{
+  ctx.beginPath();
+  ctx.lineWidth = 1.5;
+  ctx.lineCap = "round";
+  ctx.strokeStyle = "black";
+  ctx.moveTo(coord.x, coord.y);
+  repositionClick(event);
   ctx.lineTo(coord.x, coord.y);
   ctx.stroke();
 }
