@@ -30,6 +30,7 @@ body {
     border: 1px solid black;
     width: calc(28px * var(--scale));
     height: calc(28px * var(--scale));
+    touch-action: none;
 }
 
 #chartDiv {
