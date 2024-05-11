@@ -19,36 +19,41 @@
 
     <canvas id='canvasDrawing'></canvas>
     <div class='container'>
+        <h3>Guessing and training</h3>
         <div>
             <p class='guessLine'>Guess: </p>
             <b class='guessLine' id='guessText'>?</b>
         </div>
         <button id='guessButton' type="button">Guess</button>
         <button id='clearButton' type="button">Clear</button>
+        <div class='container'>
+            <label for="learningRate">Learning rate:</label><br>
+            <input type="number" max='1' min='0' step='0.001' id="learningRate" name="learningRate"><br>
+            <label for="label">Actual number:</label><br>
+            <input type="number" max='9' min='0' id="label" name="label" value="0"><br>
+            <button id="trainButton" type="submit">Train</button>
+        </div>
     </div>
     <div class='container'>
-        <label for="learningRate">Learning rate:</label><br>
-        <input type="number" max='1' min='0' step='0.001' id="learningRate" name="learningRate"><br>
-        <label for="label">Actual number:</label><br>
-        <input type="number" max='9' min='0' id="label" name="label" value="0"><br>
-        <button id="trainButton" type="submit">Train</button>
-    </div>
-    <div class='container'>
-        <p>Probability Graph:</p>
+        <h3>Probability graph:</h3>
         <div id="chartDiv">
             <canvas id='canvasGraph'></canvas>
         </div>
     </div>
     <div class='container'>
-        <div>
-            <p>Copy Functions:</p>
-            <button id='copyImageButton' type="button">Copy Image Data</button>
-            <button id='copyBrainButton' type="button">Copy Brain Data</button>
-        </div>
-        <div>
-            <p>Brain Import:</p>
-            <input type="file" id="selectFiles" value="Import" /><br />
-            <button id="importButton">Import Brain</button>
+        <h3>Extra functions:</h3>
+        <button id="showButton" type="submit">Show</button>
+        <div id='extrasDiv'>
+            <div>
+                <p>Copy functions:</p>
+                <button id='copyImageButton' type="button">Copy Image Data</button>
+                <button id='copyBrainButton' type="button">Copy Brain Data</button>
+            </div>
+            <div>
+                <p>Brain import:</p>
+                <input type="file" id="selectFiles" value="Import" /><br />
+                <button id="importButton">Import Brain</button>
+            </div>
         </div>
     </div>
     <!-- Javascript -->

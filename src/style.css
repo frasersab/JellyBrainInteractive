@@ -26,4 +26,8 @@ body {
     touch-action: none;
 }
 
+#extrasDiv {
+    display: none;
+}
+
 #chartDiv {}

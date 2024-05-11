@@ -3,7 +3,7 @@ import {JellyBrain, costFuncs, activationFuncs} from '../../node_modules/jellybr
 import Chart from 'chart.js/auto';
 
 // load the brain
-let brain = new JellyBrain(784, 784, 10, costFuncs.crossEntropy, 0.005, activationFuncs.sigmoid, activationFuncs.softmax);
+let brain = new JellyBrain(784, 784, 10, costFuncs.crossEntropy, 0.003, activationFuncs.sigmoid, activationFuncs.softmax);
 brain.importBrain(brainBigJson);
 document.getElementById('learningRate').value = brain.learningRate;
 
@@ -68,6 +68,7 @@ document.getElementById("copyImageButton").addEventListener("click", copyImageDa
 document.getElementById("copyBrainButton").addEventListener("click", copyBrainData);
 document.getElementById('importButton').addEventListener("click", importBrain);
 document.getElementById("trainButton").addEventListener("click", trainBrain);
+document.getElementById("showButton").addEventListener("click", showButton);
 
 // touch drawing functions
 function repositionTouch(event)
@@ -207,7 +208,7 @@ function importBrain()
   fr.readAsText(files.item(0));
 }
 
-// helper functions
+// extra button functions
 function trainBrain()
 {
   let image = getImage();
@@ -242,6 +243,20 @@ function trainBrain()
   }
 }
 
+function showButton()
+{
+  var showButton = document.getElementById("showButton");
+  var divBlock = document.getElementById("extrasDiv");
+  if (divBlock.style.display === "none") {
+    divBlock.style.display = "block";
+    showButton.innerHTML = "Hide";
+  } else {
+    divBlock.style.display = "none";
+    showButton.innerHTML = "Show";
+  }
+}
+
+// helper functions
 function getImage(squished = true)
 {
   let image = [];
