@@ -7,6 +7,10 @@ let brain = new JellyBrain(784, 784, 10, costFuncs.crossEntropy, 0.003, activati
 brain.importBrain(brainBigJson);
 document.getElementById('learningRate').value = brain.learningRate;
 
+// setup common variables
+let drawLineWidth = 1.5;
+let drawLineCap = "round";
+let drawColor = "black";
 
 // setup the drawing canvas
 const canvasDrawing = document.getElementById("canvasDrawing");
@@ -92,9 +96,9 @@ function stopTouch()
 function drawTouch(event)
 {
   ctx.beginPath();
-  ctx.lineWidth = 1.5;
-  ctx.lineCap = "round";
-  ctx.strokeStyle = "black";
+  ctx.lineWidth = drawLineWidth;
+  ctx.lineCap = drawLineCap;
+  ctx.strokeStyle = drawstrokeStyle;
   ctx.moveTo(coord.x, coord.y);
   repositionTouch(event);
   ctx.lineTo(coord.x, coord.y);
@@ -122,9 +126,9 @@ function stopClick()
 function drawClick(event)
 {
   ctx.beginPath();
-  ctx.lineWidth = 1.5;
-  ctx.lineCap = "round";
-  ctx.strokeStyle = "black";
+  ctx.lineWidth = drawLineWidth;
+  ctx.lineCap = drawLineCap;
+  ctx.strokeStyle = drawstrokeStyle;
   ctx.moveTo(coord.x, coord.y);
   repositionClick(event);
   ctx.lineTo(coord.x, coord.y);
