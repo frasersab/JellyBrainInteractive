@@ -17,15 +17,7 @@
 
 <body>
 
-    <canvas id='canvas'></canvas>
-    <div>
-        <button id='copyImageButton' type="button">Copy Image Data</button>
-        <button id='copyBrainButton' type="button">Copy Brain Data</button>
-    </div>
-    <div class='container'>
-        <input type="file" id="selectFiles" value="Import" /><br />
-        <button id="importButton">Import Brain</button>
-    </div>
+    <canvas id='canvasDrawing'></canvas>
     <div class='container'>
         <div>
             <p class='guessLine'>Guess: </p>
@@ -44,7 +36,19 @@
     <div class='container'>
         <p>Probability Graph:</p>
         <div id="chartDiv">
-            <canvas id='probabilityGraph'></canvas>
+            <canvas id='canvasGraph'></canvas>
+        </div>
+    </div>
+    <div class='container'>
+        <div>
+            <p>Copy Functions:</p>
+            <button id='copyImageButton' type="button">Copy Image Data</button>
+            <button id='copyBrainButton' type="button">Copy Brain Data</button>
+        </div>
+        <div>
+            <p>Brain Import:</p>
+            <input type="file" id="selectFiles" value="Import" /><br />
+            <button id="importButton">Import Brain</button>
         </div>
     </div>
     <!-- Javascript -->

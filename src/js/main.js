@@ -8,18 +8,18 @@ brain.importBrain(brainBigJson);
 document.getElementById('learningRate').value = brain.learningRate;
 
 
-// setup the canvas
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-canvas.width = 28;
-canvas.height = 28;
+// setup the drawing canvas
+const canvasDrawing = document.getElementById("canvasDrawing");
+const ctx = canvasDrawing.getContext("2d");
+canvasDrawing.width = 28;
+canvasDrawing.height = 28;
 let scale = getComputedStyle(document.body).getPropertyValue('--scale');  // getting scale from the stylesheet
 let coord = { x: 0, y: 0 };
 
 
 // setup graph
 let canvasChart = new Chart(
-    document.getElementById('probabilityGraph'),
+    document.getElementById('canvasGraph'),
     {
       type: 'bar',
       data: {
@@ -61,8 +61,6 @@ document.addEventListener("touchend", stopTouch);
 document.addEventListener("mousedown", startClick);
 document.addEventListener("mouseup", stopClick);
 
-
-
 // add button listeners
 document.getElementById("clearButton").addEventListener("click", clear);
 document.getElementById("guessButton").addEventListener("click", guess);
@@ -75,8 +73,8 @@ document.getElementById("trainButton").addEventListener("click", trainBrain);
 function repositionTouch(event)
 {
   let touch = event.touches[0];
-  coord.x = (touch.pageX - canvas.offsetLeft) / scale;
-  coord.y = (touch.pageY - canvas.offsetTop) / scale;
+  coord.x = (touch.pageX - canvasDrawing.offsetLeft) / scale;
+  coord.y = (touch.pageY - canvasDrawing.offsetTop) / scale;
 }
 
 function startTouch(event)
@@ -105,8 +103,8 @@ function drawTouch(event)
 // click drawing functions
 function repositionClick(event)
 {
-  coord.x = (event.clientX - canvas.offsetLeft) / scale;
-  coord.y = (event.clientY - canvas.offsetTop) / scale;
+  coord.x = (event.clientX - canvasDrawing.offsetLeft) / scale;
+  coord.y = (event.clientY - canvasDrawing.offsetTop) / scale;
 }
 
 function startClick(event)
@@ -132,6 +130,7 @@ function drawClick(event)
   ctx.stroke();
 }
 
+// chart functions
 function updateChart(probability)
 {
   canvasChart.data.datasets[0].data = probability.map((value) => value = value * 100)
@@ -142,7 +141,7 @@ function updateChart(probability)
 // button functions
 function clear()
 {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvasDrawing.width, canvasDrawing.height);
   guessText.innerHTML = "?";
   updateChart([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
 }
@@ -160,7 +159,6 @@ function guess()
     guessText.innerHTML = JSON.stringify(guessNumber);
     updateChart(guessArray);
 }
-
 
 function copyImageData()
 {
@@ -209,6 +207,7 @@ function importBrain()
   fr.readAsText(files.item(0));
 }
 
+// helper functions
 function trainBrain()
 {
   let image = getImage();
@@ -243,7 +242,6 @@ function trainBrain()
   }
 }
 
-// helper functions
 function getImage(squished = true)
 {
   let image = [];

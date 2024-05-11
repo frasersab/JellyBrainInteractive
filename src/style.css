@@ -15,25 +15,15 @@ body {
     padding-top: 30px;
 }
 
-#header {
-    width: 100%;
-    height: auto;
-    text-align: center;
-
-}
-
 #guessText {
     font-size: 20px;
 }
 
-#canvas {
+#canvasDrawing {
     border: 1px solid black;
     width: calc(28px * var(--scale));
     height: calc(28px * var(--scale));
     touch-action: none;
 }
 
-#chartDiv {
-    width: 200;
-    height: 100;
-}
+#chartDiv {}
