@@ -98,7 +98,7 @@ function drawTouch(event)
   ctx.beginPath();
   ctx.lineWidth = drawLineWidth;
   ctx.lineCap = drawLineCap;
-  ctx.strokeStyle = drawstrokeStyle;
+  ctx.strokeStyle = drawColor;
   ctx.moveTo(coord.x, coord.y);
   repositionTouch(event);
   ctx.lineTo(coord.x, coord.y);
@@ -128,7 +128,7 @@ function drawClick(event)
   ctx.beginPath();
   ctx.lineWidth = drawLineWidth;
   ctx.lineCap = drawLineCap;
-  ctx.strokeStyle = drawstrokeStyle;
+  ctx.strokeStyle = drawColor;
   ctx.moveTo(coord.x, coord.y);
   repositionClick(event);
   ctx.lineTo(coord.x, coord.y);
