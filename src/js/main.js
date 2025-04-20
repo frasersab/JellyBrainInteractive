@@ -183,6 +183,7 @@ function importBrain()
 {
   var files = document.getElementById('selectFiles').files;
   if (files.length <= 0) {
+    alert("Please select a file containing brain data first.");
     return false;
   }
   

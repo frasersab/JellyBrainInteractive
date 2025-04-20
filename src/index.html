@@ -18,45 +18,54 @@
 <body>
 
     <canvas id="canvasDrawing"></canvas>
+    
     <div class="container">
-        <h3>Guessing and Training</h3>
-        <div>
-            <p class="guessLine">Guess: </p>
-            <b class="guessLine" id="guessText">?</b>
+        <h3>Neural Network Prediction</h3>
+        <div class="prediction-box">
+            <div class="guess-result">
+                <b id="guessText">?</b>
+            </div>
+            <div id="chartDiv">
+                <canvas id="canvasGraph"></canvas>
+                <p class="chart-label">Confidence levels for each digit</p>
+            </div>
         </div>
         <div class="button-group">
             <button id="guessButton" type="button">Guess</button>
             <button id="clearButton" type="button">Clear</button>
         </div>
-        <div style="margin-top: 20px;">
-            <label for="learningRate">Learning rate:</label>
-            <input type="number" max="1" min="0" step="0.001" id="learningRate" name="learningRate">
-            <label for="label">Actual number:</label>
-            <input type="number" max="9" min="0" id="label" name="label" value="0">
-            <button id="trainButton" type="submit" style="width: 100%; margin-top: 15px;">Train</button>
-        </div>
     </div>
+
     <div class="container">
-        <h3>Probability Graph</h3>
-        <div id="chartDiv">
-            <canvas id="canvasGraph"></canvas>
+        <h3>Train the Neural Network</h3>
+        <div class="training-box">
+            <div class="input-group">
+                <label for="learningRate">Learning rate:</label>
+                <input type="number" max="1" min="0" step="0.001" id="learningRate" name="learningRate">
+            </div>
+            <div class="input-group">
+                <label for="label">Correct answer:</label>
+                <input type="number" max="9" min="0" id="label" name="label" value="0">
+            </div>
+            <button id="trainButton" type="submit" class="train-button">Train</button>
         </div>
     </div>
+
     <div class="container">
         <h3>Extra Functions</h3>
-        <button id="showButton" type="submit">Show</button>
+        <button id="showButton" type="submit" class="center-button">Show</button>
         <div id="extrasDiv">
             <div>
-                <p>Copy functions:</p>
-                <div class="button-group">
+                <p>Export functions:</p>
+                <div class="button-group-left">
                     <button id="copyImageButton" type="button">Copy Image Data</button>
                     <button id="copyBrainButton" type="button">Copy Brain Data</button>
                 </div>
             </div>
             <div style="margin-top: 20px;">
-                <p>Brain import:</p>
+                <p>Import neural network:</p>
                 <input type="file" id="selectFiles" value="Import" />
-                <button id="importButton" style="width: 100%;">Import Brain</button>
+                <button id="importButton" class="import-button">Import Brain</button>
             </div>
         </div>
     </div>
