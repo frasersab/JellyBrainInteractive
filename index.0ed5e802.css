@@ -1,2 +1,0 @@
-:root{--scale:8}body{margin:0;padding:20px}.guessLine{display:inline}.container{padding-top:30px}#guessText{font-size:20px}#canvasDrawing{width:calc(28px*var(--scale));height:calc(28px*var(--scale));touch-action:none;border:1px solid #000}#extrasDiv{display:none}
-/*# sourceMappingURL=index.0ed5e802.css.map */
