@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang=en><meta charset=utf-8><meta name=viewport content="width=device-width, initial-scale=1.0"><meta name=description content><meta name=keywords content><link rel=stylesheet href=JellyBrainInteractive.12c2f918.css><link rel=icon type=image/x-icon href=favicon.5ee10501.ico><title>Jelly Brain Interactive</title><body>
+
+    <canvas id=canvasDrawing></canvas>
+    
+    <div class=container>
+        <div class=non-collapsible-header>
+            <h3>Neural Network Prediction</h3>
+        </div>
+        <div class=prediction-box-pad>
+            <div class=prediction-box>
+                <div class=guess-result>
+                    <b id=guessText>?</b>
+                </div>
+                <div id=chartDiv>
+                    <canvas id=canvasGraph></canvas>
+                    <p class=chart-label>Confidence levels for each digit</p>
+                </div>
+            </div>
+            <div class=button-group>
+                <button id=guessButton type=button>Guess</button>
+                <button id=clearButton type=button>Clear</button>
+            </div>
+        </div>
+    </div>
+
+    <div class=container>
+        <div class=collapsible-header id=toggleTraining>
+            <h3>Train the Neural Network</h3>
+            <span class=collapse-arrow id=trainingArrow>▼</span>
+        </div>
+        <div id=trainingContent class=collapsible-content>
+            <div class=training-box>
+                <div class=input-group>
+                    <label for=learningRate>Learning rate:</label>
+                    <input type=number max=1 min=0 step=0.001 id=learningRate name=learningRate>
+                </div>
+                <div class=input-group>
+                    <label for=label>Correct answer:</label>
+                    <input type=number max=9 min=0 id=label name=label value=0>
+                </div>
+                <button id=trainButton class=train-button>Train</button>
+            </div>
+        </div>
+    </div>
+
+    <div class=container>
+        <div class=collapsible-header id=toggleVisualisation>
+            <h3>Neural Network Visualisation</h3>
+            <span class=collapse-arrow id=visualisationArrow>▼</span>
+        </div>
+        <div id=visualisationContent class=collapsible-content>
+            
+            <div id=loadingSpinner class=loading-spinner-container>
+                <div class=loading-spinner></div>
+                <div class=loading-text>Loading visualisation...</div>
+            </div>
+            
+            <div class="visualisation-note visualisation-warning" id=visualisationWarning>
+                Warning: Input has changed since last guess. Click "Guess" to update visualisations with the current input.
+            </div>
+
+            <div class="visualisation-note visualisation-tip" id=visualisationTip>
+                Tip: Draw and guess a digit to see which neurons activate!
+            </div>
+            
+            
+            <div class="visualisation-box visualisation-controls" id=thresholdControls>
+                <div class=threshold-setting>
+                    <label for=activationThreshold>Activation Threshold: <span id=thresholdValue>50%</span></label>
+                    <input type=range id=activationThreshold min=1 max=99 value=50 class=threshold-slider>
+                    <div class=neuron-count>
+                        <span id=activeNeuronCount>0</span> of <span id=totalNeuronCount>0</span> neurons active
+                    </div>
+                </div>
+                <div class=visualisation-options>
+                    <div class=checkbox-option>
+                        <input type=checkbox id=applyInput>
+                        <label for=applyInput>Multiply input with weights</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div id=combinedSection class="combined-section visualisation-box">
+                <h3>Active Neurons Combined View</h3>
+                <div id=combinedContainer class=combined-container></div>
+            </div>
+
+            <div id=permanentLegend class="visualisation-box visualisation-legend">
+                <div class=legend-item>
+                    <span class=legend-color style=background-color:red></span>
+                    <span>Positive Weight</span>
+                </div>
+                <div class=legend-item>
+                    <span class=legend-color style=background-color:#00f></span>
+                    <span>Negative Weight</span>
+                </div>
+                <div class=legend-item>
+                    <span class="active-border legend-color"></span>
+                    <span>Neuron Above Threshold</span>
+                </div>
+            </div>
+            
+            <h3 id=inputSectionHeader>Hidden Layer Neurons</h3>
+            
+            <div id=paginationControls class="pagination-controls visualisation-box">
+                <div class=pagination-buttons>
+                    <button id=firstPage class="icon-button pagination-button" title="First Page">«</button>
+                    <button id=prevPage class="icon-button pagination-button" title="Previous Page">‹</button>
+                </div>
+                <div class=pagination-info>
+                    Page <span id=currentPageSpan>1</span> of <span id=totalPagesSpan>1</span>
+                    (<span id=totalNeuronsSpan>0</span> neurons)
+                </div>
+                <div class=pagination-buttons>
+                    <button id=nextPage class="icon-button pagination-button" title="Next Page">›</button>
+                    <button id=lastPage class="icon-button pagination-button" title="Last Page">»</button>
+                </div>
+            </div>
+
+            <div class="neuron-filter-controls visualisation-box">
+                <div class=filter-option>
+                    <input type=checkbox id=showOnlyActive checked>
+                    <label for=showOnlyActive>Show only active neurons</label>
+                </div>
+                <div class=filter-option>
+                    <label for=neuronSortMethod>Sort:</label>
+                    <select id=neuronSortMethod class=sort-select>
+                        <option value=index>Neuron Index (Default)</option>
+                        <option value=activation-desc>Activation (High to Low)</option>
+                        <option value=activation-asc>Activation (Low to High)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <p id=visualisationInfo class=visualisation-info></p>
+            <div id=visualisationGrid class=visualisation-grid-container></div>
+        </div>
+    </div>
+
+    <div class=container>
+        <div class=collapsible-header id=toggleExtras>
+            <h3>Extra Functions</h3>
+            <span class=collapse-arrow id=extrasArrow>▼</span>
+        </div>
+        <div id=extrasContent class=collapsible-content>
+            <div style=margin-top:20px>
+                <p>Import brain:</p>
+                <select id=brainSelect class=brain-select>
+                    <option value=brainBig>Brain Big (Default)</option>
+                    <option value=brain0>Brain 0 (Untrained)</option>
+                    <option value=brain5000>Brain 5000 (5K samples)</option>
+                    <option value=brain32000>Brain 32000 (32K samples)</option>
+                    <option value=brain60000>Brain 60000 (60K samples)</option>
+                    <option value=custom>Custom (Upload File)</option>
+                </select>
+                
+                <div id=customBrainUpload class=custom-brain-upload>
+                    <input type=file id=selectFiles value=Import>
+                    <button id=importButton class=import-button>Import Brain</button>
+                </div>
+            </div>
+            <div>
+                <p>Export functions:</p>
+                <div class=button-group-left>
+                    <button id=copyImageButton type=button>Copy Image Data</button>
+                    <button id=copyBrainButton type=button>Copy Brain Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <script type=module src=JellyBrainInteractive.ef8e0a79.js></script>
+
+

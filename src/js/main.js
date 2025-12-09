@@ -1,8 +1,6 @@
 import brainBigJson from "../brains/brainBig.json";
 import brain0Json from "../brains/brain0.json";
-import brain5000Json from "../brains/brain5000.json";
 import brain32000Json from "../brains/brain32000.json";
-import brain60000Json from "../brains/brain60000.json";
 import { JellyBrain, costFuncs, activationFuncs } from "../../node_modules/jellybrain/src/JellyBrain.js";
 import Chart from "chart.js/auto";
 
@@ -17,9 +15,7 @@ const BRAIN_LAYER_SIZE = 784
 const availableBrains = {
   brainBig: brainBigJson,
   brain0: brain0Json,
-  brain5000: brain5000Json,
   brain32000: brain32000Json,
-  brain60000: brain60000Json,
 };
 
 // Initialize and load the brain
