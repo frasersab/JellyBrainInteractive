@@ -6,6 +6,7 @@
     --text-color: #1f2937;
     --border-color: #d1d5db;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --highlight-color: #22c55e; /* A nice green that fits the palette */
 }
 
 body {
@@ -19,19 +20,62 @@ body {
 
 h3 {
     color: var(--text-color);
-    margin-bottom: 1.5rem;
+    margin: 0;
     font-weight: 600;
     font-size: 1.25rem;
-    text-align: center;
 }
 
 .container {
     max-width: 600px;
     margin: 30px auto;
-    padding: 24px;
+    padding: 0;
     background: white;
     border-radius: 16px;
     box-shadow: var(--shadow);
+}
+
+.non-collapsible-header {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 5;
+    border-radius: 16px 16px 0 0;
+}
+
+.collapsible-header {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 5;
+    border-radius: 16px 16px 0 0;
+}
+
+.collapsible-header:hover {
+    background-color: #f9fafb;
+}
+
+.collapse-arrow {
+    font-size: 1rem;
+    color: #6b7280;
+    transition: transform 0.3s ease;
+}
+
+.collapsible-content {
+    padding: 24px;
+    overflow: hidden;
 }
 
 #canvasDrawing {
@@ -44,6 +88,10 @@ h3 {
     box-shadow: var(--shadow);
     display: block;
     margin: 30px auto;
+}
+
+.prediction-box-pad {
+    padding: 24px;
 }
 
 .prediction-box {
@@ -117,14 +165,15 @@ button:active {
     transform: translateY(0);
 }
 
+button:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+}
+
 .train-button {
     width: 100%;
     margin-top: 10px;
-}
-
-.center-button {
-    display: block;
-    margin: 0 auto;
 }
 
 .import-button {
@@ -154,10 +203,6 @@ label {
     margin-bottom: 6px;
 }
 
-#extrasDiv {
-    display: none;
-}
-
 .button-group {
     display: flex;
     justify-content: center;
@@ -177,6 +222,350 @@ input[type="file"] {
     width: 100%;
 }
 
+.brain-select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background-color: white;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.brain-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.custom-brain-upload {
+    display: none;
+    margin-top: 10px;
+}
+
+.visualisation-note {
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    padding: 12px 16px;
+    text-align: center;
+}
+
+.visualisation-tip {
+    color: #1e40af;
+    background-color: #dbeafe;
+}
+
+.visualisation-warning {
+    color: #92400e;
+    background-color: #fed7aa;
+}
+
+/* Common styling for visualisation boxes */
+.visualisation-box {
+    margin: 15px 0;
+    padding: 12px;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+}
+
+.visualisation-controls {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.threshold-setting {
+    flex: 1;
+}
+
+.threshold-slider {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.neuron-count {
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+.visualisation-options {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.checkbox-option {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-option input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.checkbox-option label {
+    margin-bottom: 0;
+}
+
+.neuron-filter-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-option input[type="checkbox"] {
+    margin: 0;
+}
+
+.filter-option label {
+    margin: 0;
+    font-weight: 500;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.sort-select {
+    padding: 6px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    background-color: white;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.sort-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.visualisation-info {
+    text-align: center;
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+.visualisation-section {
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+}
+
+.visualisation-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.combined-section {
+    padding: 20px;
+    display: block;
+}
+
+.combined-section h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+#inputSectionHeader {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+}
+
+.visualisation-section h3 {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+}
+
+.visualisation-grid-container {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.neurons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+    justify-content: center;
+    padding: 10px;
+}
+
+.visualisation-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+.visualisation-cell:hover {
+    transform: scale(1.05);
+}
+
+.visualisation-cell canvas {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.visualisation-cell.active-neuron {
+    border: 3px solid var(--highlight-color);
+    border-radius: 8px;
+    padding: 5px;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+    margin: 0;
+}
+
+.neuron-label {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: #4b5563;
+    font-weight: 500;
+    text-align: center;
+}
+
+.visualisation-legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.legend-color {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+}
+
+.legend-color.active-border {
+    border: 3px solid var(--highlight-color);
+    width: 12px;
+    height: 12px;
+    box-shadow: 0 0 5px rgba(34, 197, 94, 0.3);
+}
+
+.combined-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.combined-canvas {
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    background-color: white;
+}
+
+.combined-description {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-top: 10px;
+}
+
+.no-neurons-message {
+    text-align: center;
+    color: #6b7280;
+    padding: 20px;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    font-style: italic;
+}
+
+/* Loading spinner */
+.loading-spinner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.loading-spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+.loading-text {
+    color: #6b7280;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Pagination controls */
+.pagination-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.pagination-button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.icon-button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border-radius: 50%;
+}
+
+.pagination-info {
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
 @media (max-width: 640px) {
     body {
         padding: 10px;
@@ -184,7 +573,6 @@ input[type="file"] {
     
     .container {
         margin: 15px auto;
-        padding: 16px;
     }
     
     #canvasDrawing {
@@ -215,5 +603,76 @@ input[type="file"] {
 
     .import-button {
         width: 100%;
+    }
+    
+    .visualisation-controls {
+        flex-direction: column;
+    }
+    
+    .visualisation-options {
+        margin-left: 0;
+        margin-top: 15px;
+    }
+
+    .neurons-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 10px;
+        padding: 5px;
+    }
+    
+    .visualisation-cell.active-neuron {
+        border: 2px solid var(--highlight-color);
+        padding: 3px;
+    }
+    
+    .combined-canvas {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Keep pagination controls in a row on mobile */
+    .pagination-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 5px;
+        padding: 8px;
+    }
+    
+    .pagination-info {
+        font-size: 0.8rem;
+        text-align: center;
+        flex-shrink: 1;
+        min-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .pagination-buttons {
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    .icon-button {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+    
+    .pagination-button {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .neuron-filter-controls {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .filter-option {
+        width: 100%;
+        justify-content: center;
     }
 }
