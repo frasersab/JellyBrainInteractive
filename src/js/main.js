@@ -840,7 +840,7 @@ function createOutputCell(digit, compositeWeights, applyInput) {
   canvas.height = NEURON_CANVAS_SIZE;
 
   let activationValue = null;
-  if (applyInput && !cache.brain.acitvationsUndefined) {
+  if (!cache.brain.acitvationsUndefined) {
     activationValue = (cache.brain.outputActivations[digit] * 100).toFixed(1);
   }
 
@@ -850,7 +850,7 @@ function createOutputCell(digit, compositeWeights, applyInput) {
   const label = document.createElement("div");
   label.className = "neuron-label";
   let labelText = `Digit ${digit}`;
-  if (applyInput && activationValue !== null) {
+  if (activationValue !== null) {
     labelText += ` (${activationValue}%)`;
   }
   label.textContent = labelText;
