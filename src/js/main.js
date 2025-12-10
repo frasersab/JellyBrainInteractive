@@ -811,11 +811,6 @@ function updateOutputNeuronHeatmap() {
 }
 
 function getCompositeOutputWeights(digit) {
-  // Use cached weights if available and not forcing an update
-  if (false) {
-    // TODO implement caching
-  }
-
   // Calculate composite weights
   let compositeWeights = new Array(784).fill(0);
 
@@ -825,9 +820,6 @@ function getCompositeOutputWeights(digit) {
       compositeWeights[i] += cache.brain.weightsIH[i][h] * hiddenToOutputWeight;
     }
   }
-
-  // TODO Cache the result
-
   return compositeWeights;
 }
 
